@@ -1,6 +1,8 @@
 <launch>
     <!-- Create an argument to determine whether to use a XACRO or URDF file. -->
     
+    <arg name="rviz_config" default="$(find navvis_description)/config/config.rviz"/>
+
     <arg name="use_xacro" default="false"/>
     <!-- The filename can be passed into the launch file to override the default. -->
     <arg if="$(arg use_xacro)" name="filename" default="robot.xacro" />
@@ -14,7 +16,7 @@
     <arg name="use_robot_state_publisher" default="true"/>
     <node if="$(arg use_robot_state_publisher)" pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
     <!-- Run RVIZ with a configuration file. If RVIZ is closed, close everything. -->
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find navvis_description)/config/config.rviz" required="true" />
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config)" required="true" />
 
     <arg name="gui" default="true"/>
     <node if="$(arg gui)" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui"/>

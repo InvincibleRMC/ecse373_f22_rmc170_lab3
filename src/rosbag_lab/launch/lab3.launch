@@ -1,8 +1,12 @@
 <launch>
-
+    <arg name="bag_type" default="glennan_5_complete-001.bag"/>
     <include file="$(find navvis_description)/launch/lab2.launch">
         <arg name="file" value="$(find rosbag_lab)/urdf/robot_imu.xacro"/>
         <arg name="use_xacro" default="true"/>
+        <arg name="rviz_config" default="$(find rosbag_lab)/config/map_scan_config.rviz"/>
     </include>
-
+    <include file="$(find maps_glennan)/launch/glennan5_map.launch"/>
+    <node pkg="rosbag" type="play" name="bag_player" args="--clock $(find rosbag_lab)/bags/$(arg bag_type)">
+        <remap from="/tf_trajectory" to="/tf"/>
+    </node>
     </launch>

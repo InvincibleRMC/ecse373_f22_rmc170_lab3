@@ -1,0 +1,8 @@
+<launch>
+  <arg name="small" default="false" />
+  
+  <node if="$(arg small)" pkg="map_server" type="map_server" name="map_server" args="$(find maps_glennan)/maps/glennan5_small_map.yaml" required="true" />
+  
+  <node unless="$(arg small)" pkg="map_server" type="map_server" name="map_server" args="$(find maps_glennan)/maps/glennan5_map.yaml" required="true" />
+</launch>
+
