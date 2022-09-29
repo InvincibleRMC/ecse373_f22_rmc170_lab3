@@ -1,0 +1,8 @@
+<launch>
+
+    <include file="$(find navvis_description)/launch/lab2.launch">
+        <arg name="file" value="$(find rosbag_lab)/urdf/robot_imu.xacro"/>
+        <arg name="use_xacro" default="true"/>
+    </include>
+
+    </launch>
