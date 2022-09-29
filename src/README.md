@@ -6,11 +6,11 @@ To run robot with IMU with map and scans
 
 To run robot with IMU with scans and no map
 
-```roslaunch rosbag_lab lab3.launch rviz_config:=$(find rosbag_lab)/config/scan_config.rviz```
+```roslaunch rosbag_lab lab3.launch rviz_config:=<package_path>/rosbag)lab/config/scan_config.rviz```
 
 To run robot with IMU 
 
-```roslaunch rosbag_lab lab3.launch rviz_config:=$(find navvis_description)/config/config.rviz```
+```roslaunch rosbag_lab lab3.launch rviz_config:=<package_path>/navvis_description/config/config.rviz```
 
 To run robot without IMU
 
