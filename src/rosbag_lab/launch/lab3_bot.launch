@@ -1,0 +1,17 @@
+<launch>
+    <arg name="bag_type" default="glennan_5_complete-001.bag"/>
+
+    <include file="$(find navvis_description)/launch/lab2.launch">
+        <arg name="file" value="$(find rosbag_lab)/urdf/robot_imu.xacro"/>
+        <arg name="use_xacro" default="true"/>
+    </include>
+    <include file="$(find maps_glennan)/launch/glennan5_map.launch"/>
+    <node pkg="rosbag" type="play" name="bag_player" args="--clock $(find rosbag_lab)/bags/$(arg bag_type)">
+        <remap from="/tf_trajectory" to="/tf"/>
+    </node>
+    <!-- wheel fix-->
+    <arg name="wheel_parent_link" default="base"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="wheel_center_broadcaster" args="0.1 0 0 -1.57079632679 0 0 $(arg wheel_parent_link) wheel_center"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="wheel_left_broadcaster" args="-0.1 0.4 0 -1.57079632679 0 0 $(arg wheel_parent_link) wheel_left"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="wheel_right_broadcaster" args="-0.1 0.4 0 -1.57079632679 0 0 $(arg wheel_parent_link) wheel_right"/>
+</launch>
